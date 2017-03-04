@@ -9,6 +9,7 @@ Client web per https://www.packtpub.com/packt/offers/free-learning
 """
 
 import urllib2
+from bs4 import BeautifulSoup
 url = "https://www.packtpub.com/packt/offers/free-learning"
 
 
@@ -18,7 +19,8 @@ class BookOfTheDay(object):
     def main(self):
         u"""Main de la funció."""
         web = self.getWeb(url)
-        print web
+        result = self.Search(web)
+        print result.replace('\t', '')
 
     def getWeb(self, url):
         """Download the url's web."""
@@ -26,6 +28,14 @@ class BookOfTheDay(object):
         code = file.read()
         file.close()
         return code
+
+    def Search(self, web):
+        """Search for the name of the book."""
+        soup = BeautifulSoup(web, 'html.parser')
+        el = soup.find_all("div", "dotd-title")
+        for element in el:
+            title = element.find("h2")
+        return title.text
 
 
 if __name__ == "__main__":
