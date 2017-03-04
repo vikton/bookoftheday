@@ -9,6 +9,7 @@ Client web per https://www.packtpub.com/packt/offers/free-learning
 """
 
 import urllib2
+import subprocess
 from bs4 import BeautifulSoup
 url = "https://www.packtpub.com/packt/offers/free-learning"
 
@@ -20,7 +21,8 @@ class BookOfTheDay(object):
         u"""Main de la funció."""
         web = self.getWeb(url)
         result = self.Search(web)
-        print result.replace('\t', '')
+        btitle = result.replace('\t', '')
+        subprocess.Popen(["notify-send", "Llibre Gratis del dia: " + btitle])
 
     def getWeb(self, url):
         """Download the url's web."""
