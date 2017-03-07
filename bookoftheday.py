@@ -22,7 +22,7 @@ class BookOfTheDay(object):
         web = self.getWeb(url)
         result = self.Search(web)
         btitle = result.replace('\t', '')
-        subprocess.Popen(["notify-send", "Llibre Gratis del dia: " + btitle])
+        subprocess.Popen(["notify-send", "Free Book of the Day: " + btitle])
 
     def getWeb(self, url):
         """Download the url's web."""
